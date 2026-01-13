@@ -1,0 +1,141 @@
+'use client'
+
+import { useEffect, useState } from 'react'
+import {
+  Box,
+  Container,
+  Heading,
+  SimpleGrid,
+  Text,
+  VStack,
+  Card,
+  CardBody,
+  Link as ChakraLink,
+  HStack,
+} from '@chakra-ui/react'
+import Link from 'next/link'
+import dynamic from 'next/dynamic'
+import Navigation from '@/components/Navigation'
+import StarRating from '@/components/StarRating'
+import { cafes } from '@/data/cafes'
+import { Review } from '@/types/reviews'
+
+// Dynamically import map component to avoid SSR issues with Leaflet
+const CafeMap = dynamic(() => import('@/components/CafeMap'), {
+  ssr: false,
+  loading: () => (
+    <Box h="500px" bg="gray.100" borderRadius="lg" display="flex" alignItems="center" justifyContent="center">
+      <Text>Loading map...</Text>
+    </Box>
+  ),
+})
+
+export default function CafesPage() {
+  const [cafeRatings, setCafeRatings] = useState<Record<string, { average: number; count: number }>>({})
+
+  useEffect(() => {
+    // Load reviews from localStorage
+    const storedReviews = localStorage.getItem('reviews')
+    if (storedReviews) {
+      const allReviews = JSON.parse(storedReviews) as Review[]
+
+      // Calculate average rating and count for each cafe
+      const ratings: Record<string, { average: number; count: number }> = {}
+      cafes.forEach((cafe) => {
+        const cafeReviews = allReviews.filter((r) => r.cafeId === cafe.id)
+        if (cafeReviews.length > 0) {
+          const average = cafeReviews.reduce((sum, r) => sum + r.rating, 0) / cafeReviews.length
+          ratings[cafe.id] = {
+            average: Math.round(average * 10) / 10,
+            count: cafeReviews.length
+          }
+        }
+      })
+      setCafeRatings(ratings)
+    }
+  }, [])
+
+  return (
+    <>
+      <Navigation />
+      <Box bg="gray.50" minH="100vh" py={10}>
+        <Container maxW="container.xl">
+          <VStack spacing={8} align="stretch">
+            <Box>
+              <Heading as="h1" size="2xl" color="matcha.700" mb={4}>
+                Adelaide's Matcha Cafes
+              </Heading>
+              <Text fontSize="lg" color="gray.600">
+                Explore {cafes.length} authentic matcha spots across Adelaide CBD
+              </Text>
+            </Box>
+
+            {/* Map Section */}
+            <Box>
+              <Heading as="h2" size="lg" color="matcha.600" mb={4}>
+                Map View
+              </Heading>
+              <CafeMap cafes={cafes} />
+            </Box>
+
+            {/* Cafes List */}
+            <Box>
+              <Heading as="h2" size="lg" color="matcha.600" mb={4}>
+                All Cafes
+              </Heading>
+              <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={6}>
+                {cafes.map((cafe) => {
+                  const rating = cafeRatings[cafe.id]
+                  return (
+                    <Link key={cafe.id} href={`/cafes/${cafe.id}`} passHref legacyBehavior>
+                      <ChakraLink _hover={{ textDecoration: 'none' }}>
+                        <Card
+                          h="100%"
+                          _hover={{
+                            transform: 'translateY(-4px)',
+                            shadow: 'xl',
+                          }}
+                          transition="all 0.3s"
+                          cursor="pointer"
+                        >
+                          <CardBody>
+                            <VStack align="start" spacing={3}>
+                              <Heading size="md" color="matcha.700">
+                                {cafe.name}
+                              </Heading>
+                              {rating && (
+                                <HStack spacing={2}>
+                                  <StarRating rating={Math.round(rating.average)} />
+                                  <Text fontSize="sm" color="gray.600">
+                                    {rating.average.toFixed(1)} ({rating.count})
+                                  </Text>
+                                </HStack>
+                              )}
+                              <Text fontSize="sm" color="gray.600">
+                                {cafe.address}
+                              </Text>
+                              {cafe.specialty && (
+                                <Text fontSize="sm" color="matcha.500" fontWeight="medium">
+                                  {cafe.specialty}
+                                </Text>
+                              )}
+                              {cafe.description && (
+                                <Text fontSize="sm" color="gray.600">
+                                  {cafe.description}
+                                </Text>
+                              )}
+                            </VStack>
+                          </CardBody>
+                        </Card>
+                      </ChakraLink>
+                    </Link>
+                  )
+                })}
+              </SimpleGrid>
+            </Box>
+          </VStack>
+        </Container>
+      </Box>
+    </>
+  )
+}
