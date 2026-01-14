@@ -8,9 +8,9 @@ import {
   Text,
   VStack,
   HStack,
-  Image,
 } from '@chakra-ui/react'
 import Link from 'next/link'
+import Image from 'next/image'
 import Navigation from '@/components/Navigation'
 
 export default function Home() {
@@ -54,15 +54,21 @@ export default function Home() {
               </Link>
             </VStack>
 
-            <Box display={{ base: 'none', lg: 'block' }} flex="1" maxW="500px">
+            <Box
+              display={{ base: 'none', lg: 'block' }}
+              flex="1"
+              maxW="500px"
+              position="relative"
+              height="500px"
+              borderRadius="2xl"
+              overflow="hidden"
+              boxShadow="2xl"
+            >
               <Image
                 src="https://images.unsplash.com/photo-1536013452277-279e6f9f1e3f?w=800&auto=format&fit=crop&q=80"
                 alt="Matcha latte with latte art"
-                borderRadius="2xl"
-                boxShadow="2xl"
-                objectFit="cover"
-                w="100%"
-                h="500px"
+                fill
+                style={{ objectFit: 'cover' }}
               />
             </Box>
           </HStack>
