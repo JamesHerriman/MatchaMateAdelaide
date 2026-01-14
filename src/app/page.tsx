@@ -36,19 +36,19 @@ export default function Home() {
               Discover real matcha spots loved by locals — from the CBD to the East End.
               No outdated blogs, no tourist traps. Just authentic Adelaide matcha culture.
             </Text>
-            <Link href="/cafes">
-              <Button
-                size="lg"
-                colorScheme="matcha"
-                bg="matcha.500"
-                _hover={{ bg: 'matcha.600' }}
-                px={8}
-                py={6}
-                fontSize="lg"
-              >
-                Browse Cafes
-              </Button>
-            </Link>
+            <Button
+              as={Link}
+              href="/cafes"
+              size="lg"
+              colorScheme="matcha"
+              bg="matcha.500"
+              _hover={{ bg: 'matcha.600' }}
+              px={8}
+              py={6}
+              fontSize="lg"
+            >
+              Browse Cafes
+            </Button>
           </VStack>
         </Container>
 
