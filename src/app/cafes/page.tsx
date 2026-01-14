@@ -89,7 +89,7 @@ export default function CafesPage() {
           <VStack spacing={8} align="stretch">
             <Box>
               <Heading as="h1" size="2xl" color="matcha.700" mb={4}>
-                Adelaide's Matcha Cafes
+                Adelaide's Matcha Cafés
               </Heading>
               <Text fontSize="lg" color="gray.600">
                 Explore {cafes.length} authentic matcha spots across Adelaide CBD
@@ -107,7 +107,7 @@ export default function CafesPage() {
             {/* Cafes List */}
             <Box>
               <Heading as="h2" size="lg" color="matcha.600" mb={4}>
-                Top Cafes
+                Top Cafés
               </Heading>
               <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={6}>
                 {sortedCafes.map((cafe) => {

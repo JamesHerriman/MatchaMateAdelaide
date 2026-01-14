@@ -32,7 +32,7 @@ export default function Home() {
               lineHeight="1.2"
               fontWeight="bold"
             >
-              Your Guide to Adelaide's Best Matcha Cafes
+              Your Guide to Adelaide's Best Matcha Cafés
             </Heading>
             <Text fontSize="xl" color="gray.700" maxW="lg">
               Discover real matcha spots loved by locals — from the CBD to the East End.
@@ -52,7 +52,7 @@ export default function Home() {
               textAlign="center"
               whiteSpace="nowrap"
             >
-              Browse Cafes
+              Browse Cafés
             </Button>
           </VStack>
         </Container>

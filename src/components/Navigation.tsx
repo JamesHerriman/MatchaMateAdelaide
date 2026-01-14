@@ -22,7 +22,7 @@ export default function Navigation() {
                 _hover={{ textDecoration: 'underline', color: 'matcha.600' }}
                 transition="all 0.2s"
               >
-                Cafes
+                Cafés
               </Box>
             </Link>
           </Flex>
