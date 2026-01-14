@@ -7,6 +7,8 @@ import {
   Heading,
   Text,
   VStack,
+  HStack,
+  Image,
 } from '@chakra-ui/react'
 import Link from 'next/link'
 import Navigation from '@/components/Navigation'
@@ -22,34 +24,48 @@ export default function Home() {
         overflow="hidden"
       >
         <Container maxW="container.xl" py={20}>
-          <VStack spacing={8} align="start" maxW="2xl">
-            <Heading
-              as="h1"
-              size="3xl"
-              color="matcha.800"
-              lineHeight="1.2"
-              fontWeight="bold"
-            >
-              Your Guide to Adelaide's Best Matcha Cafes
-            </Heading>
-            <Text fontSize="xl" color="gray.700" maxW="lg">
-              Discover real matcha spots loved by locals — from the CBD to the East End.
-              No outdated blogs, no tourist traps. Just authentic Adelaide matcha culture.
-            </Text>
-            <Link href="/cafes">
-              <Button
-                size="lg"
-                colorScheme="matcha"
-                bg="matcha.500"
-                _hover={{ bg: 'matcha.600' }}
-                px={8}
-                py={6}
-                fontSize="lg"
+          <HStack spacing={12} align="center" justify="space-between">
+            <VStack spacing={8} align="start" maxW="2xl" flex="1">
+              <Heading
+                as="h1"
+                size="3xl"
+                color="matcha.800"
+                lineHeight="1.2"
+                fontWeight="bold"
               >
-                Browse Cafes
-              </Button>
-            </Link>
-          </VStack>
+                Your Guide to Adelaide's Best Matcha Cafes
+              </Heading>
+              <Text fontSize="xl" color="gray.700" maxW="lg">
+                Discover real matcha spots loved by locals — from the CBD to the East End.
+                No outdated blogs, no tourist traps. Just authentic Adelaide matcha culture.
+              </Text>
+              <Link href="/cafes">
+                <Button
+                  size="lg"
+                  colorScheme="matcha"
+                  bg="matcha.500"
+                  _hover={{ bg: 'matcha.600' }}
+                  px={8}
+                  py={6}
+                  fontSize="lg"
+                >
+                  Browse Cafes
+                </Button>
+              </Link>
+            </VStack>
+
+            <Box display={{ base: 'none', lg: 'block' }} flex="1" maxW="500px">
+              <Image
+                src="https://images.unsplash.com/photo-1536013452277-279e6f9f1e3f?w=800&auto=format&fit=crop&q=80"
+                alt="Matcha latte with latte art"
+                borderRadius="2xl"
+                boxShadow="2xl"
+                objectFit="cover"
+                w="100%"
+                h="500px"
+              />
+            </Box>
+          </HStack>
         </Container>
 
         {/* Decorative elements */}
