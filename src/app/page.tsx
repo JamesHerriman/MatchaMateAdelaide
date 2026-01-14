@@ -48,6 +48,9 @@ export default function Home() {
               py={6}
               fontSize="lg"
               cursor="pointer"
+              width="fit-content"
+              textAlign="center"
+              whiteSpace="nowrap"
             >
               Browse Cafes
             </Button>
