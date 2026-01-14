@@ -107,5 +107,14 @@ export const cafes: Cafe[] = [
     lng: 138.6005915998554,
     specialty: 'Italian deli with matcha',
     description: 'Modern delicatessen and cafe offering sandwiches, pastries, and quality matcha lattes.'
+  },
+  {
+    id: 'kafin',
+    name: 'Kafi:n',
+    address: '211 Rundle St, Adelaide SA 5000',
+    lat: -34.9224713391593,
+    lng: 138.6077296710216,
+    specialty: 'Korean cafe with matcha',
+    description: 'Korean-style cafe offering delicious matcha drinks and Korean-inspired treats.'
   }
 ];
