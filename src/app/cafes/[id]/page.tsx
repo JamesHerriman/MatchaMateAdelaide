@@ -24,6 +24,7 @@ import ReviewForm from '@/components/ReviewForm'
 import ReviewList from '@/components/ReviewList'
 import { cafes } from '@/data/cafes'
 import { Review } from '@/types/reviews'
+import { supabase, SupabaseReview } from '@/lib/supabase'
 
 const CafeMap = dynamic(() => import('@/components/CafeMap'), {
   ssr: false,
@@ -41,40 +42,43 @@ export default function CafeDetailPage() {
 
   const cafe = cafes.find((c) => c.id === cafeId)
 
-  // Store reviews in localStorage
   const [reviews, setReviews] = useState<Review[]>([])
+  const [isLoading, setIsLoading] = useState(true)
+
+  const fetchReviews = async () => {
+    try {
+      const { data, error } = await supabase
+        .from('reviews')
+        .select('*')
+        .eq('cafe_id', cafeId)
+        .order('created_at', { ascending: false })
+
+      if (error) throw error
+
+      const formattedReviews: Review[] = (data as SupabaseReview[]).map((r) => ({
+        id: r.id,
+        cafeId: r.cafe_id,
+        rating: r.rating,
+        comment: r.comment,
+        author: r.author,
+        date: r.created_at,
+      }))
+
+      setReviews(formattedReviews)
+    } catch (error) {
+      console.error('Error fetching reviews:', error)
+    } finally {
+      setIsLoading(false)
+    }
+  }
 
   useEffect(() => {
-    // Load reviews from localStorage
-    const storedReviews = localStorage.getItem('reviews')
-    if (storedReviews) {
-      const allReviews = JSON.parse(storedReviews) as Review[]
-      setReviews(allReviews.filter((r) => r.cafeId === cafeId))
-    }
+    fetchReviews()
   }, [cafeId])
 
-  const handleReviewSubmit = (reviewData: {
-    rating: number
-    comment: string
-    author: string
-  }) => {
-    const newReview: Review = {
-      id: Date.now().toString(),
-      cafeId,
-      rating: reviewData.rating,
-      comment: reviewData.comment,
-      author: reviewData.author,
-      date: new Date().toISOString(),
-    }
-
-    // Load all reviews, add new one, and save back
-    const storedReviews = localStorage.getItem('reviews')
-    const allReviews = storedReviews ? JSON.parse(storedReviews) : []
-    const updatedReviews = [...allReviews, newReview]
-    localStorage.setItem('reviews', JSON.stringify(updatedReviews))
-
-    // Update state
-    setReviews((prev) => [newReview, ...prev])
+  const handleReviewSubmit = () => {
+    // Refresh reviews after submission
+    fetchReviews()
   }
 
   if (!cafe) {

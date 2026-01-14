@@ -18,7 +18,7 @@ import dynamic from 'next/dynamic'
 import Navigation from '@/components/Navigation'
 import StarRating from '@/components/StarRating'
 import { cafes } from '@/data/cafes'
-import { Review } from '@/types/reviews'
+import { supabase } from '@/lib/supabase'
 
 // Dynamically import map component to avoid SSR issues with Leaflet
 const CafeMap = dynamic(() => import('@/components/CafeMap'), {
@@ -34,25 +34,33 @@ export default function CafesPage() {
   const [cafeRatings, setCafeRatings] = useState<Record<string, { average: number; count: number }>>({})
 
   useEffect(() => {
-    // Load reviews from localStorage
-    const storedReviews = localStorage.getItem('reviews')
-    if (storedReviews) {
-      const allReviews = JSON.parse(storedReviews) as Review[]
+    const fetchAllRatings = async () => {
+      try {
+        const { data, error } = await supabase
+          .from('reviews')
+          .select('cafe_id, rating')
 
-      // Calculate average rating and count for each cafe
-      const ratings: Record<string, { average: number; count: number }> = {}
-      cafes.forEach((cafe) => {
-        const cafeReviews = allReviews.filter((r) => r.cafeId === cafe.id)
-        if (cafeReviews.length > 0) {
-          const average = cafeReviews.reduce((sum, r) => sum + r.rating, 0) / cafeReviews.length
-          ratings[cafe.id] = {
-            average: Math.round(average * 10) / 10,
-            count: cafeReviews.length
+        if (error) throw error
+
+        // Calculate average rating and count for each cafe
+        const ratings: Record<string, { average: number; count: number }> = {}
+        cafes.forEach((cafe) => {
+          const cafeReviews = data?.filter((r) => r.cafe_id === cafe.id) || []
+          if (cafeReviews.length > 0) {
+            const average = cafeReviews.reduce((sum, r) => sum + r.rating, 0) / cafeReviews.length
+            ratings[cafe.id] = {
+              average: Math.round(average * 10) / 10,
+              count: cafeReviews.length
+            }
           }
-        }
-      })
-      setCafeRatings(ratings)
+        })
+        setCafeRatings(ratings)
+      } catch (error) {
+        console.error('Error fetching ratings:', error)
+      }
     }
+
+    fetchAllRatings()
   }, [])
 
   return (

@@ -13,14 +13,11 @@ import {
   Text,
 } from '@chakra-ui/react'
 import StarRating from './StarRating'
+import { supabase } from '@/lib/supabase'
 
 interface ReviewFormProps {
   cafeId: string
-  onReviewSubmit: (review: {
-    rating: number
-    comment: string
-    author: string
-  }) => void
+  onReviewSubmit: () => void
 }
 
 export default function ReviewForm({ cafeId, onReviewSubmit }: ReviewFormProps) {
@@ -30,7 +27,7 @@ export default function ReviewForm({ cafeId, onReviewSubmit }: ReviewFormProps) 
   const [isSubmitting, setIsSubmitting] = useState(false)
   const toast = useToast()
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
 
     if (rating === 0) {
@@ -68,25 +65,43 @@ export default function ReviewForm({ cafeId, onReviewSubmit }: ReviewFormProps) 
 
     setIsSubmitting(true)
 
-    onReviewSubmit({
-      rating,
-      comment: comment.trim(),
-      author: author.trim(),
-    })
+    try {
+      const { error } = await supabase.from('reviews').insert({
+        cafe_id: cafeId,
+        rating,
+        comment: comment.trim(),
+        author: author.trim(),
+      })
 
-    // Reset form
-    setRating(0)
-    setComment('')
-    setAuthor('')
-    setIsSubmitting(false)
+      if (error) throw error
 
-    toast({
-      title: 'Review submitted!',
-      description: 'Thank you for your feedback',
-      status: 'success',
-      duration: 3000,
-      isClosable: true,
-    })
+      // Reset form
+      setRating(0)
+      setComment('')
+      setAuthor('')
+
+      toast({
+        title: 'Review submitted!',
+        description: 'Thank you for your feedback',
+        status: 'success',
+        duration: 3000,
+        isClosable: true,
+      })
+
+      // Trigger refresh
+      onReviewSubmit()
+    } catch (error) {
+      console.error('Error submitting review:', error)
+      toast({
+        title: 'Error submitting review',
+        description: 'Please try again later',
+        status: 'error',
+        duration: 3000,
+        isClosable: true,
+      })
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   return (
