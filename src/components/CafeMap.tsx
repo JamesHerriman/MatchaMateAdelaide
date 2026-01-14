@@ -5,7 +5,7 @@ import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
 import { Box, Text, Link as ChakraLink } from '@chakra-ui/react'
 import Link from 'next/link'
 import L from 'leaflet'
-import { Cafe } from '@/data/cafes'
+import { Café } from '@/data/cafes'
 
 // Fix for default marker icons in react-leaflet
 const icon = L.icon({
@@ -19,7 +19,7 @@ const icon = L.icon({
 })
 
 interface CafeMapProps {
-  cafes: Cafe[]
+  cafes: Café[]
 }
 
 export default function CafeMap({ cafes }: CafeMapProps) {
