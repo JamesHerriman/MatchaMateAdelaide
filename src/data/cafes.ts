@@ -31,8 +31,8 @@ export const cafes: Cafe[] = [
     id: 'blended',
     name: 'Blended',
     address: '95 Grenfell St, Adelaide SA 5000',
-    lat: -34.9240,
-    lng: 138.6020,
+    lat: -34.924460149284684,
+    lng: 138.60327653747476,
     specialty: 'Bagels & specialty matcha',
     description: 'Bringing bagels and brews to the CBD with excellent matcha options.'
   },
@@ -67,8 +67,8 @@ export const cafes: Cafe[] = [
     id: 'please-say-please',
     name: 'Please Say Please',
     address: 'Shop 2 W, 50 Grenfell St, Adelaide SA 5000',
-    lat: -34.9240,
-    lng: 138.6020,
+    lat: -34.924035709656714,
+    lng: 138.60170476299606,
     specialty: 'Specialty coffee & matcha',
     description: 'Known for excellent coffee and quality matcha drinks in a friendly atmosphere.'
   }
