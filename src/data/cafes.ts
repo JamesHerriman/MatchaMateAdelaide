@@ -42,7 +42,7 @@ export const cafes: Cafe[] = [
     address: 'Unit 2, 61-63 Grote St, Adelaide SA 5000',
     lat: -34.9294,
     lng: 138.5965,
-    specialty: 'Matcha cafe next to the Central Market',
+    specialty: 'Matcha near the Central Market',
     description: 'Adelaide\'s newest matcha and coffee haven, pouring exceptional matcha.'
   },
   {
