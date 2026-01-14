@@ -63,6 +63,24 @@ export default function CafesPage() {
     fetchAllRatings()
   }, [])
 
+  // Sort cafes by rating (highest first), then alphabetically for unrated cafes
+  const sortedCafes = [...cafes].sort((a, b) => {
+    const ratingA = cafeRatings[a.id]
+    const ratingB = cafeRatings[b.id]
+
+    // If both have ratings, sort by average rating (descending)
+    if (ratingA && ratingB) {
+      return ratingB.average - ratingA.average
+    }
+
+    // If only one has a rating, it comes first
+    if (ratingA && !ratingB) return -1
+    if (!ratingA && ratingB) return 1
+
+    // If neither has a rating, sort alphabetically
+    return a.name.localeCompare(b.name)
+  })
+
   return (
     <>
       <Navigation />
@@ -89,10 +107,10 @@ export default function CafesPage() {
             {/* Cafes List */}
             <Box>
               <Heading as="h2" size="lg" color="matcha.600" mb={4}>
-                All Cafes
+                Top Cafes
               </Heading>
               <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={6}>
-                {cafes.map((cafe) => {
+                {sortedCafes.map((cafe) => {
                   const rating = cafeRatings[cafe.id]
                   return (
                     <Link key={cafe.id} href={`/cafes/${cafe.id}`} passHref legacyBehavior>
