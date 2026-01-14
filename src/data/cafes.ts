@@ -71,5 +71,14 @@ export const cafes: Cafe[] = [
     lng: 138.60170476299606,
     specialty: 'Specialty coffee & matcha',
     description: 'Known for excellent coffee and quality matcha drinks in a friendly atmosphere.'
+  },
+  {
+    id: 'deux-coffee',
+    name: 'Deux Coffee Roasters',
+    address: '149 Flinders St, Adelaide SA 5000',
+    lat: -34.92705546386342,
+    lng: 138.6063623863002,
+    specialty: 'Japanese matcha & coffee roasters',
+    description: 'Adelaide\'s newest coffee roasters serving matcha straight from Japan.'
   }
 ];
