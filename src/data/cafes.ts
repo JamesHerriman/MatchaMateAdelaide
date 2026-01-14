@@ -80,5 +80,32 @@ export const cafes: Cafe[] = [
     lng: 138.6063623863002,
     specialty: 'Japanese matcha & coffee roasters',
     description: 'Adelaide\'s newest coffee roasters serving matcha straight from Japan.'
+  },
+  {
+    id: 'homeboy',
+    name: 'Homeboy',
+    address: '266-269 North Terrace, Adelaide SA 5000',
+    lat: -34.921382693977804,
+    lng: 138.60756112684334,
+    specialty: 'Focaccias, scrolls & matcha',
+    description: 'Social media sensation serving smooth matcha and specialty coffee at Yugo Adelaide.'
+  },
+  {
+    id: 'cha-no-wa',
+    name: 'Cha-no-wa',
+    address: 'Shop G6, 33 King William St, Adelaide SA 5000',
+    lat: -34.92292549373351,
+    lng: 138.59913148306933,
+    specialty: 'Luxury Japanese matcha & sweets',
+    description: 'First Australian store of the Hiroshima matcha brand, serving premium matcha drinks and desserts.'
+  },
+  {
+    id: 'bottega-bandito',
+    name: 'Bottega Bandito',
+    address: '25 James Pl, Adelaide SA 5000',
+    lat: -34.92368219585526,
+    lng: 138.6005915998554,
+    specialty: 'Italian deli with matcha',
+    description: 'Modern delicatessen and cafe offering sandwiches, pastries, and quality matcha lattes.'
   }
 ];
