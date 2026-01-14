@@ -8,10 +8,12 @@ import {
   Text,
   VStack,
 } from '@chakra-ui/react'
-import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import Navigation from '@/components/Navigation'
 
 export default function Home() {
+  const router = useRouter()
+
   return (
     <>
       <Navigation />
@@ -37,8 +39,7 @@ export default function Home() {
               No outdated blogs, no tourist traps. Just authentic Adelaide matcha culture.
             </Text>
             <Button
-              as={Link}
-              href="/cafes"
+              onClick={() => router.push('/cafes')}
               size="lg"
               colorScheme="matcha"
               bg="matcha.500"
@@ -46,6 +47,7 @@ export default function Home() {
               px={8}
               py={6}
               fontSize="lg"
+              cursor="pointer"
             >
               Browse Cafes
             </Button>
