@@ -14,8 +14,9 @@ import {
   Badge,
   Card,
   CardBody,
+  Link as ChakraLink,
 } from '@chakra-ui/react'
-import { ArrowBackIcon } from '@chakra-ui/icons'
+import { ArrowBackIcon, ExternalLinkIcon } from '@chakra-ui/icons'
 import dynamic from 'next/dynamic'
 import Navigation from '@/components/Navigation'
 import StarRating from '@/components/StarRating'
@@ -164,6 +165,18 @@ export default function CafeDetailPage() {
                       Location
                     </Text>
                     <CafeMap cafes={[cafe]} />
+                    <ChakraLink
+                      href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(cafe.name + ' ' + cafe.address)}`}
+                      isExternal
+                      display="inline-flex"
+                      alignItems="center"
+                      mt={3}
+                      color="matcha.600"
+                      fontWeight="medium"
+                      _hover={{ textDecoration: 'underline' }}
+                    >
+                      View on Google Maps <ExternalLinkIcon mx="2px" />
+                    </ChakraLink>
                   </Box>
                 </VStack>
               </CardBody>
