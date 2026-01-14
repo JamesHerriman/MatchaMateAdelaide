@@ -1,4 +1,4 @@
-export interface Cafe {
+export interface Café {
   id: string;
   name: string;
   address: string;
@@ -8,10 +8,10 @@ export interface Cafe {
   description?: string;
 }
 
-export const cafes: Cafe[] = [
+export const cafes: Café[] = [
   {
     id: 'luxxe',
-    name: 'Luxxe Cafe',
+    name: 'Luxxe Café',
     address: '60 Waymouth St, Adelaide SA 5000',
     lat: -34.92579587843371,
     lng: 138.59736580994866,
@@ -29,7 +29,7 @@ export const cafes: Cafe[] = [
   },
   {
     id: 'blended',
-    name: 'Blended Cafe Adelaide',
+    name: 'Blended Café Adelaide',
     address: '95 Grenfell St, Adelaide SA 5000',
     lat: -34.924460149284684,
     lng: 138.60327653747476,
@@ -38,7 +38,7 @@ export const cafes: Cafe[] = [
   },
   {
     id: 'noru-cafe',
-    name: 'Noru Cafe',
+    name: 'Noru Café',
     address: 'Unit 2, 61-63 Grote St, Adelaide SA 5000',
     lat: -34.9294,
     lng: 138.5965,
