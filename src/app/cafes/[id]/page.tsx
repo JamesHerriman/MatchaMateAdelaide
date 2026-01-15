@@ -25,6 +25,7 @@ import ReviewList from '@/components/ReviewList'
 import { cafes } from '@/data/cafes'
 import { Review } from '@/types/reviews'
 import { supabase, SupabaseReview } from '@/lib/supabase'
+import { isCafeOpen } from '@/utils/cafeHelpers'
 
 const CafeMap = dynamic(() => import('@/components/CafeMap'), {
   ssr: false,
@@ -101,6 +102,8 @@ export default function CafeDetailPage() {
       ? reviews.reduce((sum, r) => sum + r.rating, 0) / reviews.length
       : 0
 
+  const isOpen = isCafeOpen(cafe)
+
   return (
     <>
       <Navigation />
@@ -117,7 +120,18 @@ export default function CafeDetailPage() {
               Back to all cafes
             </Button>
 
-            <Card>
+            <Card position="relative">
+              <Badge
+                position="absolute"
+                top={6}
+                right={6}
+                colorScheme={isOpen ? 'green' : 'red'}
+                fontSize="sm"
+                px={3}
+                py={1}
+              >
+                {isOpen ? 'Open' : 'Closed'}
+              </Badge>
               <CardBody>
                 <VStack spacing={6} align="stretch">
                   <Box>

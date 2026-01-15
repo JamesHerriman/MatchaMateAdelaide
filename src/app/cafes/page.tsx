@@ -15,14 +15,16 @@ import {
   Switch,
   FormControl,
   FormLabel,
+  Badge,
 } from '@chakra-ui/react'
 import Link from 'next/link'
 import dynamic from 'next/dynamic'
 import Navigation from '@/components/Navigation'
 import StarRating from '@/components/StarRating'
 import { MapErrorBoundary } from '@/components/MapErrorBoundary'
-import { cafes, Café } from '@/data/cafes'
+import { cafes } from '@/data/cafes'
 import { supabase } from '@/lib/supabase'
+import { isCafeOpen } from '@/utils/cafeHelpers'
 
 // Dynamically import map component to avoid SSR issues with Leaflet
 const CafeMap = dynamic(() => import('@/components/CafeMap'), {
@@ -33,39 +35,6 @@ const CafeMap = dynamic(() => import('@/components/CafeMap'), {
     </Box>
   ),
 })
-
-// Helper function to check if a cafe is currently open
-function isCafeOpen(cafe: Café): boolean {
-  if (!cafe.openingHours) return true // If no hours specified, assume open
-
-  const now = new Date()
-  const currentDay = now.toLocaleDateString('en-US', { weekday: 'long' }).toLowerCase()
-  const currentTime = now.getHours() * 60 + now.getMinutes() // minutes since midnight
-
-  // Get the hours for current day
-  const todayHours = cafe.openingHours[currentDay as keyof typeof cafe.openingHours]
-
-  if (!todayHours || todayHours === 'Closed') return false
-
-  // Parse opening hours (e.g., "7:00 AM - 3:00 PM")
-  const timeRegex = /(\d{1,2}):(\d{2})\s*(AM|PM)\s*-\s*(\d{1,2}):(\d{2})\s*(AM|PM)/i
-  const match = todayHours.match(timeRegex)
-
-  if (!match) return true // If we can't parse, assume open
-
-  const [_, openHour, openMin, openPeriod, closeHour, closeMin, closePeriod] = match
-
-  // Convert to 24-hour format and calculate minutes since midnight
-  let openTime = parseInt(openHour) * 60 + parseInt(openMin)
-  if (openPeriod.toUpperCase() === 'PM' && parseInt(openHour) !== 12) openTime += 12 * 60
-  if (openPeriod.toUpperCase() === 'AM' && parseInt(openHour) === 12) openTime = parseInt(openMin)
-
-  let closeTime = parseInt(closeHour) * 60 + parseInt(closeMin)
-  if (closePeriod.toUpperCase() === 'PM' && parseInt(closeHour) !== 12) closeTime += 12 * 60
-  if (closePeriod.toUpperCase() === 'AM' && parseInt(closeHour) === 12) closeTime = parseInt(closeMin)
-
-  return currentTime >= openTime && currentTime <= closeTime
-}
 
 export default function CafesPage() {
   const [cafeRatings, setCafeRatings] = useState<Record<string, { average: number; count: number }>>({})
@@ -176,6 +145,7 @@ export default function CafesPage() {
               <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={6}>
                 {sortedCafes.map((cafe) => {
                   const rating = cafeRatings[cafe.id]
+                  const isOpen = isCafeOpen(cafe)
                   return (
                     <Link key={cafe.id} href={`/cafes/${cafe.id}`} style={{ textDecoration: 'none' }}>
                       <Card
@@ -186,7 +156,19 @@ export default function CafesPage() {
                         }}
                         transition="all 0.3s"
                         cursor="pointer"
+                        position="relative"
                       >
+                        <Badge
+                          position="absolute"
+                          top={4}
+                          right={4}
+                          colorScheme={isOpen ? 'green' : 'red'}
+                          fontSize="xs"
+                          px={2}
+                          py={1}
+                        >
+                          {isOpen ? 'Open' : 'Closed'}
+                        </Badge>
                         <CardBody>
                           <VStack align="start" spacing={3}>
                             <Heading size="md" color="matcha.700">
