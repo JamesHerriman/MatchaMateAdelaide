@@ -113,49 +113,45 @@ export default function CafesPage() {
                 {sortedCafes.map((cafe) => {
                   const rating = cafeRatings[cafe.id]
                   return (
-                    <Link key={cafe.id} href={`/cafes/${cafe.id}`}>
-                      {/* @next-codemod-error This Link previously used the now removed `legacyBehavior` prop, and has a child that might not be an anchor. The codemod bailed out of lifting the child props to the Link. Check that the child component does not render an anchor, and potentially move the props manually to Link. */
-                      }
-                      <ChakraLink _hover={{ textDecoration: 'none' }}>
-                        <Card
-                          h="100%"
-                          _hover={{
-                            transform: 'translateY(-4px)',
-                            shadow: 'xl',
-                          }}
-                          transition="all 0.3s"
-                          cursor="pointer"
-                        >
-                          <CardBody>
-                            <VStack align="start" spacing={3}>
-                              <Heading size="md" color="matcha.700">
-                                {cafe.name}
-                              </Heading>
-                              {rating && (
-                                <HStack spacing={2}>
-                                  <StarRating rating={Math.round(rating.average)} />
-                                  <Text fontSize="sm" color="gray.600">
-                                    {rating.average.toFixed(1)} ({rating.count})
-                                  </Text>
-                                </HStack>
-                              )}
-                              <Text fontSize="sm" color="gray.600">
-                                {cafe.address}
-                              </Text>
-                              {cafe.specialty && (
-                                <Text fontSize="sm" color="matcha.500" fontWeight="medium">
-                                  {cafe.specialty}
-                                </Text>
-                              )}
-                              {cafe.description && (
+                    <Link key={cafe.id} href={`/cafes/${cafe.id}`} style={{ textDecoration: 'none' }}>
+                      <Card
+                        h="100%"
+                        _hover={{
+                          transform: 'translateY(-4px)',
+                          shadow: 'xl',
+                        }}
+                        transition="all 0.3s"
+                        cursor="pointer"
+                      >
+                        <CardBody>
+                          <VStack align="start" spacing={3}>
+                            <Heading size="md" color="matcha.700">
+                              {cafe.name}
+                            </Heading>
+                            {rating && (
+                              <HStack spacing={2}>
+                                <StarRating rating={Math.round(rating.average)} />
                                 <Text fontSize="sm" color="gray.600">
-                                  {cafe.description}
+                                  {rating.average.toFixed(1)} ({rating.count})
                                 </Text>
-                              )}
-                            </VStack>
-                          </CardBody>
-                        </Card>
-                      </ChakraLink>
+                              </HStack>
+                            )}
+                            <Text fontSize="sm" color="gray.600">
+                              {cafe.address}
+                            </Text>
+                            {cafe.specialty && (
+                              <Text fontSize="sm" color="matcha.500" fontWeight="medium">
+                                {cafe.specialty}
+                              </Text>
+                            )}
+                            {cafe.description && (
+                              <Text fontSize="sm" color="gray.600">
+                                {cafe.description}
+                              </Text>
+                            )}
+                          </VStack>
+                        </CardBody>
+                      </Card>
                     </Link>
                   );
                 })}
