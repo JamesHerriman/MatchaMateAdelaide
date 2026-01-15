@@ -27,6 +27,15 @@ export default function CafeMap({ cafes }: CafeMapProps) {
   const containerRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
+    // Clean up any existing Leaflet containers before mounting
+    if (containerRef.current) {
+      const existingContainer = containerRef.current.querySelector('.leaflet-container') as any
+      if (existingContainer) {
+        // Remove the entire container to force fresh initialization
+        existingContainer.parentNode?.removeChild(existingContainer)
+      }
+    }
+
     setIsMounted(true)
 
     // Fix for Leaflet default icon paths
@@ -41,12 +50,16 @@ export default function CafeMap({ cafes }: CafeMapProps) {
     return () => {
       if (containerRef.current) {
         const container = containerRef.current.querySelector('.leaflet-container') as any
-        if (container && container._leaflet_id) {
-          // Remove the Leaflet instance
-          const map = (container as any)._leaflet_map
-          if (map) {
-            map.remove()
+        if (container) {
+          // Try to remove the map instance
+          if (container._leaflet_id) {
+            const map = (L as any)._getMap?.(container._leaflet_id)
+            if (map && map.remove) {
+              map.remove()
+            }
           }
+          // Also clear the container's Leaflet ID
+          delete container._leaflet_id
         }
       }
     }
