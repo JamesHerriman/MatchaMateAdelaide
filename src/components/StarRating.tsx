@@ -1,7 +1,7 @@
 'use client'
 
-import { HStack, Icon } from '@chakra-ui/react'
-import { FaStar, FaRegStar } from 'react-icons/fa'
+import { HStack, Icon, Box } from '@chakra-ui/react'
+import { FaStar, FaRegStar, FaStarHalfAlt } from 'react-icons/fa'
 
 interface StarRatingProps {
   rating: number
@@ -28,11 +28,60 @@ export default function StarRating({
     <HStack spacing={1}>
       {[...Array(maxRating)].map((_, index) => {
         const starValue = index + 1
+        const difference = rating - index
+
+        // Determine which star icon to show
+        let starIcon = FaRegStar
+        let starColor = 'gray.300'
+
+        if (difference >= 1) {
+          // Full star
+          starIcon = FaStar
+          starColor = 'yellow.400'
+        } else if (difference > 0) {
+          // Partial star - show filled portion
+          // Use a container with gradient to show partial fill
+          return (
+            <Box
+              key={index}
+              position="relative"
+              display="inline-block"
+              cursor={isInteractive ? 'pointer' : 'default'}
+              onClick={() => handleClick(starValue)}
+              _hover={
+                isInteractive
+                  ? {
+                      transform: 'scale(1.1)',
+                      transition: 'transform 0.2s',
+                    }
+                  : {}
+              }
+            >
+              {/* Empty star background */}
+              <Icon
+                as={FaRegStar}
+                color="gray.300"
+                boxSize={`${size}px`}
+                position="absolute"
+              />
+              {/* Filled star with clip */}
+              <Icon
+                as={FaStar}
+                color="yellow.400"
+                boxSize={`${size}px`}
+                style={{
+                  clipPath: `inset(0 ${100 - difference * 100}% 0 0)`,
+                }}
+              />
+            </Box>
+          )
+        }
+
         return (
           <Icon
             key={index}
-            as={starValue <= rating ? FaStar : FaRegStar}
-            color={starValue <= rating ? 'yellow.400' : 'gray.300'}
+            as={starIcon}
+            color={starColor}
             boxSize={`${size}px`}
             cursor={isInteractive ? 'pointer' : 'default'}
             onClick={() => handleClick(starValue)}
