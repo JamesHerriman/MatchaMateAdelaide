@@ -23,11 +23,11 @@ interface CafeMapProps {
 }
 
 export default function CafeMap({ cafes }: CafeMapProps) {
-  const [isClient, setIsClient] = useState(false)
+  const [mapKey, setMapKey] = useState<string>('')
 
   useEffect(() => {
-    // Ensure we're on the client side
-    setIsClient(true)
+    // Generate a unique key on mount to prevent re-initialization
+    setMapKey(`map-${Date.now()}`)
 
     // Fix for Leaflet default icon paths
     delete (L.Icon.Default.prototype as any)._getIconUrl
@@ -41,7 +41,7 @@ export default function CafeMap({ cafes }: CafeMapProps) {
   // Center of Adelaide CBD
   const center: [number, number] = [-34.9285, 138.6007]
 
-  if (!isClient) {
+  if (!mapKey) {
     return <Box h="500px" w="100%" borderRadius="lg" overflow="hidden" boxShadow="lg" />
   }
 
@@ -52,7 +52,7 @@ export default function CafeMap({ cafes }: CafeMapProps) {
         zoom={15}
         style={{ height: '100%', width: '100%' }}
         scrollWheelZoom={false}
-        key="map-container"
+        key={mapKey}
       >
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
