@@ -30,18 +30,6 @@ const CafeMap = dynamic(() => import('@/components/CafeMap'), {
   ),
 })
 
-// Wrapper component to handle map remounting
-function CafeMapWrapper({ cafes }: { cafes: typeof import('@/data/cafes').cafes }) {
-  const [mapKey, setMapKey] = useState(0)
-
-  useEffect(() => {
-    // Force remount on hot reload by updating key
-    setMapKey((prev) => prev + 1)
-  }, [])
-
-  return <CafeMap cafes={cafes} key={`map-${mapKey}`} />
-}
-
 export default function CafesPage() {
   const [cafeRatings, setCafeRatings] = useState<Record<string, { average: number; count: number }>>({})
 
@@ -113,7 +101,7 @@ export default function CafesPage() {
               <Heading as="h2" size="lg" color="matcha.600" mb={4}>
                 Map View
               </Heading>
-              <CafeMapWrapper cafes={cafes} />
+              <CafeMap cafes={cafes} />
             </Box>
 
             {/* Cafes List */}
