@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
 import { Box, Text, Link as ChakraLink } from '@chakra-ui/react'
 import Link from 'next/link'
@@ -23,11 +23,11 @@ interface CafeMapProps {
 }
 
 export default function CafeMap({ cafes }: CafeMapProps) {
-  const [mapKey, setMapKey] = useState<string>('')
+  const [isMounted, setIsMounted] = useState(false)
+  const containerRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    // Generate a unique key on mount to prevent re-initialization
-    setMapKey(`map-${Date.now()}`)
+    setIsMounted(true)
 
     // Fix for Leaflet default icon paths
     delete (L.Icon.Default.prototype as any)._getIconUrl
@@ -36,23 +36,36 @@ export default function CafeMap({ cafes }: CafeMapProps) {
       iconUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
       shadowUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png',
     })
+
+    // Cleanup function to remove map instance on unmount
+    return () => {
+      if (containerRef.current) {
+        const container = containerRef.current.querySelector('.leaflet-container') as any
+        if (container && container._leaflet_id) {
+          // Remove the Leaflet instance
+          const map = (container as any)._leaflet_map
+          if (map) {
+            map.remove()
+          }
+        }
+      }
+    }
   }, [])
 
   // Center of Adelaide CBD
   const center: [number, number] = [-34.9285, 138.6007]
 
-  if (!mapKey) {
+  if (!isMounted) {
     return <Box h="500px" w="100%" borderRadius="lg" overflow="hidden" boxShadow="lg" />
   }
 
   return (
-    <Box h="500px" w="100%" borderRadius="lg" overflow="hidden" boxShadow="lg">
+    <Box h="500px" w="100%" borderRadius="lg" overflow="hidden" boxShadow="lg" ref={containerRef}>
       <MapContainer
         center={center}
         zoom={15}
         style={{ height: '100%', width: '100%' }}
         scrollWheelZoom={false}
-        key={mapKey}
       >
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
