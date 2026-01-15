@@ -164,6 +164,58 @@ export default function CafeDetailPage() {
                     </Box>
                   )}
 
+                  {cafe.openingHours && (
+                    <Box>
+                      <Text fontSize="lg" color="gray.700" fontWeight="medium" mb={3}>
+                        Opening Hours
+                      </Text>
+                      <VStack align="stretch" spacing={2}>
+                        {cafe.openingHours.monday && (
+                          <HStack justify="space-between">
+                            <Text color="gray.600" fontWeight="medium">Monday</Text>
+                            <Text color="gray.600">{cafe.openingHours.monday}</Text>
+                          </HStack>
+                        )}
+                        {cafe.openingHours.tuesday && (
+                          <HStack justify="space-between">
+                            <Text color="gray.600" fontWeight="medium">Tuesday</Text>
+                            <Text color="gray.600">{cafe.openingHours.tuesday}</Text>
+                          </HStack>
+                        )}
+                        {cafe.openingHours.wednesday && (
+                          <HStack justify="space-between">
+                            <Text color="gray.600" fontWeight="medium">Wednesday</Text>
+                            <Text color="gray.600">{cafe.openingHours.wednesday}</Text>
+                          </HStack>
+                        )}
+                        {cafe.openingHours.thursday && (
+                          <HStack justify="space-between">
+                            <Text color="gray.600" fontWeight="medium">Thursday</Text>
+                            <Text color="gray.600">{cafe.openingHours.thursday}</Text>
+                          </HStack>
+                        )}
+                        {cafe.openingHours.friday && (
+                          <HStack justify="space-between">
+                            <Text color="gray.600" fontWeight="medium">Friday</Text>
+                            <Text color="gray.600">{cafe.openingHours.friday}</Text>
+                          </HStack>
+                        )}
+                        {cafe.openingHours.saturday && (
+                          <HStack justify="space-between">
+                            <Text color="gray.600" fontWeight="medium">Saturday</Text>
+                            <Text color="gray.600">{cafe.openingHours.saturday}</Text>
+                          </HStack>
+                        )}
+                        {cafe.openingHours.sunday && (
+                          <HStack justify="space-between">
+                            <Text color="gray.600" fontWeight="medium">Sunday</Text>
+                            <Text color="gray.600">{cafe.openingHours.sunday}</Text>
+                          </HStack>
+                        )}
+                      </VStack>
+                    </Box>
+                  )}
+
                   <Box>
                     <Text fontSize="lg" color="gray.700" fontWeight="medium" mb={4}>
                       Location
