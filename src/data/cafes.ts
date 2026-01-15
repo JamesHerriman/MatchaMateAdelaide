@@ -52,8 +52,8 @@ export const cafes: Café[] = [
       wednesday: '7:30 AM - 3:00 PM',
       thursday: '7:30 AM - 3:00 PM',
       friday: '7:30 AM - 3:00 PM',
-      saturday: '10:00 AM - 3:00 PM',
-      sunday: '10:00 AM - 3:00 PM'
+      saturday: '10:00 AM - 2:00 PM',
+      sunday: 'Closed'
     }
   },
   {
@@ -83,12 +83,12 @@ export const cafes: Café[] = [
     specialty: 'Matcha near the Central Market',
     description: 'Adelaide\'s newest matcha and coffee haven, pouring exceptional matcha.',
     openingHours: {
-      monday: '7:00 AM - 3:00 PM',
-      tuesday: '7:00 AM - 3:00 PM',
-      wednesday: '7:00 AM - 3:00 PM',
-      thursday: '7:00 AM - 3:00 PM',
+      monday: '7:00 AM - 4:00 PM',
+      tuesday: '7:00 AM - 4:00 PM',
+      wednesday: '7:00 AM - 4:00 PM',
+      thursday: '7:00 AM - 4:00 PM',
       friday: '7:00 AM - 4:00 PM',
-      saturday: '7:00 AM - 3:00 PM',
+      saturday: 'Closed',
       sunday: 'Closed'
     }
   },
@@ -101,11 +101,11 @@ export const cafes: Café[] = [
     specialty: 'Japanese sandos & matcha',
     description: 'Japanese-inspired cafe serving onigiri, fluffy shokupan, and quality matcha.',
     openingHours: {
-      monday: '7:00 AM - 3:00 PM',
-      tuesday: '7:00 AM - 3:00 PM',
-      wednesday: '7:00 AM - 3:00 PM',
-      thursday: '7:00 AM - 3:00 PM',
-      friday: '7:00 AM - 3:00 PM',
+      monday: '8:00 AM - 4:00 PM',
+      tuesday: '8:00 AM - 4:00 PM',
+      wednesday: '8:00 AM - 4:00 PM',
+      thursday: '8:00 AM - 4:00 PM',
+      friday: '8:00 AM - 4:00 PM',
       saturday: '8:30 AM - 3:00 PM',
       sunday: '8:30 AM - 3:00 PM'
     }
@@ -119,13 +119,13 @@ export const cafes: Café[] = [
     specialty: 'Traditional Japanese & matcha',
     description: 'Authentic Japanese restaurant with traditional matcha offerings.',
     openingHours: {
-      monday: '5:30 PM - 10:30 PM',
-      tuesday: 'Closed',
-      wednesday: '5:30 PM - 10:30 PM',
-      thursday: '5:30 PM - 10:30 PM',
-      friday: '12:00 PM - 2:00 PM, 5:30 PM - 10:30 PM',
-      saturday: '5:30 PM - 10:30 PM',
-      sunday: '5:30 PM - 10:30 PM'
+      monday: 'Closed',
+      tuesday: '11:00 AM - 6:00 PM',
+      wednesday: '11:00 AM - 6:00 PM',
+      thursday: '11:00 AM - 6:00 PM',
+      friday: '11:00 AM - 9:00 PM',
+      saturday: '11:00 AM - 6:00 PM',
+      sunday: 'Closed'
     }
   },
   {
@@ -142,8 +142,8 @@ export const cafes: Café[] = [
       wednesday: '6:00 AM - 2:00 PM',
       thursday: '6:00 AM - 2:00 PM',
       friday: '6:00 AM - 2:00 PM',
-      saturday: '8:00 AM - 1:00 PM',
-      sunday: '8:00 AM - 1:00 PM'
+      saturday: '8:00 AM - 11:30 AM',
+      sunday: '8:00 AM - 11:30 AM'
     }
   },
   {
@@ -153,7 +153,16 @@ export const cafes: Café[] = [
     lat: -34.92705546386342,
     lng: 138.6063623863002,
     specialty: 'Japanese matcha & coffee roasters',
-    description: 'Adelaide\'s newest coffee roasters serving matcha straight from Japan.'
+    description: 'Adelaide\'s newest coffee roasters serving matcha straight from Japan.',
+    openingHours: {
+      monday: '7:00 AM - 2:00 PM',
+      tuesday: '7:00 AM - 2:00 PM',
+      wednesday: '7:00 AM - 2:00 PM',
+      thursday: '7:00 AM - 2:00 PM',
+      friday: '7:00 AM - 2:00 PM',
+      saturday: '8:00 AM - 1:00 PM',
+      sunday: 'Closed'
+    }
   },
   {
     id: 'homeboy',
@@ -164,12 +173,12 @@ export const cafes: Café[] = [
     specialty: 'Focaccias, scrolls & matcha',
     description: 'Social media sensation serving smooth matcha and specialty coffee at Yugo Adelaide.',
     openingHours: {
-      monday: 'Closed',
+      monday: '7:00 AM - 3:00 PM',
       tuesday: '7:00 AM - 3:00 PM',
       wednesday: '7:00 AM - 3:00 PM',
       thursday: '7:00 AM - 3:00 PM',
       friday: '7:00 AM - 3:00 PM',
-      saturday: '7:00 AM - 3:00 PM',
+      saturday: '8:00 AM - 2:00 PM',
       sunday: 'Closed'
     }
   },
@@ -200,13 +209,13 @@ export const cafes: Café[] = [
     specialty: 'Italian deli with matcha',
     description: 'Modern delicatessen and cafe offering sandwiches, pastries, and quality matcha lattes.',
     openingHours: {
-      monday: '7:00 AM - 4:00 PM',
-      tuesday: '7:00 AM - 4:00 PM',
-      wednesday: '7:00 AM - 4:00 PM',
-      thursday: '7:00 AM - 4:00 PM',
-      friday: '7:00 AM - 4:00 PM',
-      saturday: '7:00 AM - 4:00 PM',
-      sunday: '7:00 AM - 4:00 PM'
+      monday: '7:00 AM - 3:00 PM',
+      tuesday: '7:00 AM - 3:00 PM',
+      wednesday: '7:00 AM - 3:00 PM',
+      thursday: '7:00 AM - 3:00 PM',
+      friday: '7:00 AM - 3:00 PM',
+      saturday: '8:00 AM - 3:00 PM',
+      sunday: '8:00 AM - 3:00 PM'
     }
   },
   {
@@ -220,10 +229,10 @@ export const cafes: Café[] = [
     openingHours: {
       monday: '7:00 AM - 5:00 PM',
       tuesday: '7:00 AM - 5:00 PM',
-      wednesday: '7:00 AM - 5:00 PM',
-      thursday: '7:00 AM - 5:00 PM',
-      friday: '7:00 AM - 10:00 PM',
-      saturday: '8:00 AM - 10:00 PM',
+      wednesday: '7:00 AM - 10:00 PM',
+      thursday: '7:00 AM - 10:00 PM',
+      friday: '7:00 AM - 11:00 PM',
+      saturday: '8:00 AM - 11:00 PM',
       sunday: '9:00 AM - 5:00 PM'
     }
   }
