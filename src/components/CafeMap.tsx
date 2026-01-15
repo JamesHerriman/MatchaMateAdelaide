@@ -13,9 +13,9 @@ const createCustomIcon = (isOpen: boolean) => {
   const color = isOpen ? '#38A169' : '#E53E3E'
 
   const svgIcon = `
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 36" width="25" height="41">
-      <path fill="${color}" stroke="#FFFFFF" stroke-width="1.5" d="M12 0C7.029 0 3 4.029 3 9c0 7.5 9 18 9 18s9-10.5 9-18c0-4.971-4.029-9-9-9z"/>
-      <circle cx="12" cy="9" r="3.5" fill="#FFFFFF"/>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 41" width="25" height="41">
+      <path fill="${color}" stroke="#2C5282" stroke-width="1" d="M12.5 0C7.25 0 3 4.25 3 9.5c0 8.5 9.5 21.5 9.5 21.5S22 18 22 9.5C22 4.25 17.75 0 12.5 0z"/>
+      <circle cx="12.5" cy="9.5" r="3" fill="#FFFFFF"/>
     </svg>
   `
 
@@ -23,11 +23,9 @@ const createCustomIcon = (isOpen: boolean) => {
 
   return L.icon({
     iconUrl,
-    shadowUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png',
     iconSize: [25, 41],
     iconAnchor: [12, 41],
-    popupAnchor: [1, -34],
-    shadowSize: [41, 41]
+    popupAnchor: [1, -34]
   })
 }
 
