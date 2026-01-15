@@ -1,7 +1,7 @@
 'use client'
 
 import React from 'react'
-import { Box, Text } from '@chakra-ui/react'
+import { Box, Text, Button, VStack } from '@chakra-ui/react'
 
 interface Props {
   children: React.ReactNode
@@ -9,15 +9,16 @@ interface Props {
 
 interface State {
   hasError: boolean
+  resetKey: number
 }
 
 export class MapErrorBoundary extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props)
-    this.state = { hasError: false }
+    this.state = { hasError: false, resetKey: 0 }
   }
 
-  static getDerivedStateFromError(error: Error): State {
+  static getDerivedStateFromError(error: Error): Partial<State> {
     // Check if it's the Leaflet initialization error
     if (error.message?.includes('Map container is already initialized')) {
       return { hasError: true }
@@ -31,6 +32,10 @@ export class MapErrorBoundary extends React.Component<Props, State> {
     if (!error.message?.includes('Map container is already initialized')) {
       throw error
     }
+  }
+
+  handleReset = () => {
+    this.setState({ hasError: false, resetKey: this.state.resetKey + 1 })
   }
 
   render() {
@@ -47,13 +52,18 @@ export class MapErrorBoundary extends React.Component<Props, State> {
           alignItems="center"
           justifyContent="center"
         >
-          <Text color="gray.600">
-            Map temporarily unavailable. Refresh the page to view the map.
-          </Text>
+          <VStack spacing={4}>
+            <Text color="gray.600">
+              Map temporarily unavailable due to a hot reload issue.
+            </Text>
+            <Button colorScheme="green" onClick={this.handleReset}>
+              Reload Map
+            </Button>
+          </VStack>
         </Box>
       )
     }
 
-    return this.props.children
+    return <div key={this.state.resetKey}>{this.props.children}</div>
   }
 }
