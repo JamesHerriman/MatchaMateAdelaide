@@ -45,7 +45,11 @@ export default function StarRating({
             <Box
               key={index}
               position="relative"
-              display="inline-block"
+              display="inline-flex"
+              alignItems="center"
+              justifyContent="center"
+              width={`${size}px`}
+              height={`${size}px`}
               cursor={isInteractive ? 'pointer' : 'default'}
               onClick={() => handleClick(starValue)}
               _hover={
@@ -63,12 +67,17 @@ export default function StarRating({
                 color="gray.300"
                 boxSize={`${size}px`}
                 position="absolute"
+                top="0"
+                left="0"
               />
               {/* Filled star with clip */}
               <Icon
                 as={FaStar}
                 color="yellow.400"
                 boxSize={`${size}px`}
+                position="absolute"
+                top="0"
+                left="0"
                 style={{
                   clipPath: `inset(0 ${100 - difference * 100}% 0 0)`,
                 }}
