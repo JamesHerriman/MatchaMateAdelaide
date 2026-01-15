@@ -53,7 +53,9 @@ export default function CafeMap({ cafes }: CafeMapProps) {
           <Marker key={cafe.id} position={[cafe.lat, cafe.lng]} icon={icon}>
             <Popup>
               <Box p={2}>
-                <Link href={`/cafes/${cafe.id}`} passHref legacyBehavior>
+                <Link href={`/cafes/${cafe.id}`}>
+                  {/* @next-codemod-error This Link previously used the now removed `legacyBehavior` prop, and has a child that might not be an anchor. The codemod bailed out of lifting the child props to the Link. Check that the child component does not render an anchor, and potentially move the props manually to Link. */
+                  }
                   <ChakraLink fontWeight="bold" color="matcha.600" fontSize="lg">
                     {cafe.name}
                   </ChakraLink>
@@ -72,5 +74,5 @@ export default function CafeMap({ cafes }: CafeMapProps) {
         ))}
       </MapContainer>
     </Box>
-  )
+  );
 }

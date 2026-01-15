@@ -113,7 +113,9 @@ export default function CafesPage() {
                 {sortedCafes.map((cafe) => {
                   const rating = cafeRatings[cafe.id]
                   return (
-                    <Link key={cafe.id} href={`/cafes/${cafe.id}`} passHref legacyBehavior>
+                    <Link key={cafe.id} href={`/cafes/${cafe.id}`}>
+                      {/* @next-codemod-error This Link previously used the now removed `legacyBehavior` prop, and has a child that might not be an anchor. The codemod bailed out of lifting the child props to the Link. Check that the child component does not render an anchor, and potentially move the props manually to Link. */
+                      }
                       <ChakraLink _hover={{ textDecoration: 'none' }}>
                         <Card
                           h="100%"
@@ -155,7 +157,7 @@ export default function CafesPage() {
                         </Card>
                       </ChakraLink>
                     </Link>
-                  )
+                  );
                 })}
               </SimpleGrid>
             </Box>
@@ -163,5 +165,5 @@ export default function CafesPage() {
         </Container>
       </Box>
     </>
-  )
+  );
 }
