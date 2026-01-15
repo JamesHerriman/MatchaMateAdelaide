@@ -234,7 +234,7 @@ export default function CafeDetailPage() {
                     <Text fontSize="lg" color="gray.700" fontWeight="medium" mb={4}>
                       Location
                     </Text>
-                    <CafeMap cafes={[cafe]} />
+                    <CafeMap cafes={[cafe]} isCafeOpen={isCafeOpen} />
                     <ChakraLink
                       href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(cafe.name + ' ' + cafe.address)}`}
                       isExternal

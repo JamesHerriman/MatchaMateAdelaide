@@ -117,7 +117,7 @@ export default function CafesPage() {
                 Map View
               </Heading>
               <MapErrorBoundary>
-                <CafeMap cafes={cafes} />
+                <CafeMap cafes={filteredCafes} isCafeOpen={isCafeOpen} />
               </MapErrorBoundary>
             </Box>
 
