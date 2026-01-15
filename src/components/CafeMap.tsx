@@ -2,7 +2,7 @@
 
 import { useEffect, useState, useRef } from 'react'
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
-import { Box, Text, Link as ChakraLink } from '@chakra-ui/react'
+import { Box, Text, Link as ChakraLink, Badge, HStack } from '@chakra-ui/react'
 import Link from 'next/link'
 import L from 'leaflet'
 import { Café } from '@/data/cafes'
@@ -105,9 +105,20 @@ export default function CafeMap({ cafes, isCafeOpen }: CafeMapProps) {
             <Marker key={cafe.id} position={[cafe.lat, cafe.lng]} icon={icon}>
               <Popup>
                 <Box p={2}>
-                  <Link href={`/cafes/${cafe.id}`} style={{ fontWeight: 'bold', color: 'var(--chakra-colors-matcha-600)', fontSize: '1.125rem', textDecoration: 'none' }}>
-                    {cafe.name}
-                  </Link>
+                  <HStack justify="space-between" align="start" mb={2}>
+                    <Link href={`/cafes/${cafe.id}`} style={{ fontWeight: 'bold', color: 'var(--chakra-colors-matcha-600)', fontSize: '1.125rem', textDecoration: 'none' }}>
+                      {cafe.name}
+                    </Link>
+                    <Badge
+                      colorScheme={isOpen ? 'green' : 'red'}
+                      fontSize="xs"
+                      px={2}
+                      py={1}
+                      flexShrink={0}
+                    >
+                      {isOpen ? 'Open' : 'Closed'}
+                    </Badge>
+                  </HStack>
                   <Text fontSize="sm" color="gray.600" mt={1}>
                     {cafe.address}
                   </Text>
