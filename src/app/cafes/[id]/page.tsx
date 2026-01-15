@@ -125,7 +125,7 @@ export default function CafeDetailPage() {
                       {cafe.name}
                     </Heading>
                     <HStack spacing={4} mt={4}>
-                      <StarRating rating={Math.round(averageRating)} />
+                      <StarRating rating={averageRating} />
                       <Text color="gray.600">
                         {averageRating > 0
                           ? `${averageRating.toFixed(1)} out of 5`

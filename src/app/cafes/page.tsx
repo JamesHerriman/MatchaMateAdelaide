@@ -133,7 +133,7 @@ export default function CafesPage() {
                             </Heading>
                             {rating && (
                               <HStack spacing={2}>
-                                <StarRating rating={Math.round(rating.average)} />
+                                <StarRating rating={rating.average} />
                                 <Text fontSize="sm" color="gray.600">
                                   {rating.average.toFixed(1)} ({rating.count})
                                 </Text>
