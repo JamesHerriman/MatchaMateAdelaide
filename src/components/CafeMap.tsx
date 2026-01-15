@@ -106,7 +106,7 @@ export default function CafeMap({ cafes, isCafeOpen }: CafeMapProps) {
               <Popup>
                 <Box p={2}>
                   <HStack justify="space-between" align="start" mb={2}>
-                    <Link href={`/cafes/${cafe.id}`} style={{ fontWeight: 'bold', color: 'var(--chakra-colors-matcha-600)', fontSize: '1.125rem', textDecoration: 'none' }}>
+                    <Link href={`/cafes/${cafe.id}`} style={{ fontWeight: 'bold', color: 'var(--chakra-colors-matcha-700)', fontSize: '1.125rem', textDecoration: 'none' }}>
                       {cafe.name}
                     </Link>
                     <Badge
