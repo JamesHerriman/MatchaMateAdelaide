@@ -17,6 +17,7 @@ import Link from 'next/link'
 import dynamic from 'next/dynamic'
 import Navigation from '@/components/Navigation'
 import StarRating from '@/components/StarRating'
+import { MapErrorBoundary } from '@/components/MapErrorBoundary'
 import { cafes } from '@/data/cafes'
 import { supabase } from '@/lib/supabase'
 
@@ -101,7 +102,9 @@ export default function CafesPage() {
               <Heading as="h2" size="lg" color="matcha.600" mb={4}>
                 Map View
               </Heading>
-              <CafeMap cafes={cafes} />
+              <MapErrorBoundary>
+                <CafeMap cafes={cafes} />
+              </MapErrorBoundary>
             </Box>
 
             {/* Cafes List */}

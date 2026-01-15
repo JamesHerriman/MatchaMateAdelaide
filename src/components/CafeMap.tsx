@@ -25,7 +25,6 @@ interface CafeMapProps {
 export default function CafeMap({ cafes }: CafeMapProps) {
   const [isMounted, setIsMounted] = useState(false)
   const containerRef = useRef<HTMLDivElement>(null)
-  const [hasError, setHasError] = useState(false)
 
   useEffect(() => {
     setIsMounted(true)
@@ -60,24 +59,14 @@ export default function CafeMap({ cafes }: CafeMapProps) {
     return <Box h="500px" w="100%" borderRadius="lg" overflow="hidden" boxShadow="lg" />
   }
 
-  // If map initialization fails (hot reload issue), show fallback
-  if (hasError) {
-    return (
-      <Box h="500px" w="100%" borderRadius="lg" overflow="hidden" boxShadow="lg" bg="gray.100" display="flex" alignItems="center" justifyContent="center">
-        <Text color="gray.600">Map temporarily unavailable. Refresh the page to view the map.</Text>
-      </Box>
-    )
-  }
-
-  try {
-    return (
-      <Box h="500px" w="100%" borderRadius="lg" overflow="hidden" boxShadow="lg" ref={containerRef}>
-        <MapContainer
-          center={center}
-          zoom={15}
-          style={{ height: '100%', width: '100%' }}
-          scrollWheelZoom={false}
-        >
+  return (
+    <Box h="500px" w="100%" borderRadius="lg" overflow="hidden" boxShadow="lg" ref={containerRef}>
+      <MapContainer
+        center={center}
+        zoom={15}
+        style={{ height: '100%', width: '100%' }}
+        scrollWheelZoom={false}
+      >
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -104,17 +93,5 @@ export default function CafeMap({ cafes }: CafeMapProps) {
         ))}
       </MapContainer>
     </Box>
-    )
-  } catch (error: any) {
-    // Catch map initialization errors during hot reload
-    if (error.message?.includes('Map container is already initialized')) {
-      setHasError(true)
-      return (
-        <Box h="500px" w="100%" borderRadius="lg" overflow="hidden" boxShadow="lg" bg="gray.100" display="flex" alignItems="center" justifyContent="center">
-          <Text color="gray.600">Map temporarily unavailable. Refresh the page to view the map.</Text>
-        </Box>
-      )
-    }
-    throw error
-  }
+  );
 }
