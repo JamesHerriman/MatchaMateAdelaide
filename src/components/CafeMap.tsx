@@ -7,11 +7,19 @@ import Link from 'next/link'
 import L from 'leaflet'
 import { Café } from '@/data/cafes'
 
-// Create custom icons for open and closed cafes
+// Create custom SVG icon with Chakra UI colors
 const createCustomIcon = (isOpen: boolean) => {
-  const iconUrl = isOpen
-    ? 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-green.png'
-    : 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png'
+  // Chakra UI green.500 = #38A169, red.500 = #E53E3E
+  const color = isOpen ? '#38A169' : '#E53E3E'
+
+  const svgIcon = `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 36" width="25" height="41">
+      <path fill="${color}" stroke="#FFFFFF" stroke-width="1.5" d="M12 0C7.029 0 3 4.029 3 9c0 7.5 9 18 9 18s9-10.5 9-18c0-4.971-4.029-9-9-9z"/>
+      <circle cx="12" cy="9" r="3.5" fill="#FFFFFF"/>
+    </svg>
+  `
+
+  const iconUrl = 'data:image/svg+xml;base64,' + btoa(svgIcon)
 
   return L.icon({
     iconUrl,
