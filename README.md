@@ -2,7 +2,7 @@
 
 Your guide to Adelaide's best matcha cafés. Discover authentic matcha spots loved by locals across Adelaide CBD.
 
-🌐 **Live Site**: [matcha-mate-adelaide.vercel.app](https://matcha-mate-adelaide.vercel.app)
+🌐 **Live Site**: [matchamatee-adelaide.vercel.app](https://matchamatee-adelaide.vercel.app)
 
 ## Features
 
