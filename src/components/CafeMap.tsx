@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
 import { Box, Text, Link as ChakraLink } from '@chakra-ui/react'
 import Link from 'next/link'
@@ -23,7 +23,12 @@ interface CafeMapProps {
 }
 
 export default function CafeMap({ cafes }: CafeMapProps) {
+  const [isClient, setIsClient] = useState(false)
+
   useEffect(() => {
+    // Ensure we're on the client side
+    setIsClient(true)
+
     // Fix for Leaflet default icon paths
     delete (L.Icon.Default.prototype as any)._getIconUrl
     L.Icon.Default.mergeOptions({
@@ -36,6 +41,10 @@ export default function CafeMap({ cafes }: CafeMapProps) {
   // Center of Adelaide CBD
   const center: [number, number] = [-34.9285, 138.6007]
 
+  if (!isClient) {
+    return <Box h="500px" w="100%" borderRadius="lg" overflow="hidden" boxShadow="lg" />
+  }
+
   return (
     <Box h="500px" w="100%" borderRadius="lg" overflow="hidden" boxShadow="lg">
       <MapContainer
@@ -43,6 +52,7 @@ export default function CafeMap({ cafes }: CafeMapProps) {
         zoom={15}
         style={{ height: '100%', width: '100%' }}
         scrollWheelZoom={false}
+        key="map-container"
       >
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
