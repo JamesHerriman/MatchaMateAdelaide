@@ -6,14 +6,29 @@ Your guide to Adelaide's best matcha cafés. Discover authentic matcha spots lov
 
 ## Features
 
+### Core Features
 - Browse 12 carefully curated matcha cafés in Adelaide CBD
-- Interactive map showing all café locations with accurate coordinates
-- Rate cafés with 5-star rating system
+- Interactive map with color-coded pins (green = open, red = closed)
+- Detailed opening hours for each café
+- Rate cafés with 5-star rating system supporting partial stars (e.g., 4.5, 3.7)
 - Leave comments and reviews for each café
-- View average ratings and all reviews (synced across all users)
+- View average ratings and all reviews (synced across all users via Supabase)
 - Cafés sorted by highest rating
-- Beautiful matcha-themed design with green and pink color scheme
+
+### Real-Time Features
+- **"Open Now" filter** - Toggle to show only currently open cafés
+- Live open/closed status badges on all café cards
+- Color-coded map pins indicating current café status
+- Status badges in map popups when clicking pins
+- Dynamic filtering updates map and café list simultaneously
+
+### User Experience
+- Beautiful matcha-themed design with custom green and pink color scheme
 - Fully responsive design for mobile and desktop
+- Individual café detail pages with comprehensive information
+- Direct Google Maps integration for navigation
+- Error boundaries for graceful map error handling
+- Smooth hover animations and transitions
 
 ## Tech Stack
 
@@ -67,24 +82,27 @@ matchamate-adelaide/
 │   ├── app/                    # Next.js app directory
 │   │   ├── cafes/              # Cafés listing and detail pages
 │   │   │   ├── [id]/           # Dynamic café detail pages
-│   │   │   └── page.tsx        # Cafés listing page
+│   │   │   └── page.tsx        # Cafés listing page with Open Now filter
 │   │   ├── layout.tsx          # Root layout
 │   │   ├── page.tsx            # Homepage
 │   │   └── providers.tsx       # Chakra UI provider
 │   ├── components/             # React components
-│   │   ├── CafeMap.tsx         # Leaflet map component
+│   │   ├── CafeMap.tsx         # Leaflet map with color-coded pins
+│   │   ├── MapErrorBoundary.tsx # Error boundary for map hot-reload issues
 │   │   ├── Navigation.tsx      # Navigation bar
 │   │   ├── ReviewForm.tsx      # Review submission form
 │   │   ├── ReviewList.tsx      # Reviews display
-│   │   └── StarRating.tsx      # Star rating component
+│   │   └── StarRating.tsx      # Star rating with partial star support
 │   ├── data/
-│   │   └── cafes.ts            # Café data with addresses & coordinates
+│   │   └── cafes.ts            # Café data with addresses, coordinates & hours
 │   ├── lib/
 │   │   └── supabase.ts         # Supabase client configuration
 │   ├── theme/
 │   │   └── theme.ts            # Chakra UI theme (matcha green & pink)
-│   └── types/
-│       └── reviews.ts          # TypeScript types
+│   ├── types/
+│   │   └── reviews.ts          # TypeScript types
+│   └── utils/
+│       └── cafeHelpers.ts      # Helper functions (e.g., isCafeOpen)
 ├── package.json
 ├── tsconfig.json
 ├── next.config.js
@@ -164,8 +182,33 @@ Contributions are welcome! If you know of a great matcha café in Adelaide that'
 
 MIT
 
+## Key Technical Implementations
+
+### Partial Star Ratings
+The star rating system uses CSS `clipPath` to display precise decimal ratings (e.g., 4.7 stars shows 4 full stars and one 70% filled star) by overlaying filled and empty star icons.
+
+### Real-Time Open/Closed Detection
+The `isCafeOpen()` helper function:
+- Parses 12-hour time format opening hours
+- Compares current time against café operating hours
+- Handles special cases (closed days, midnight times)
+- Powers the "Open Now" filter and status badges
+
+### Custom Map Pins
+SVG-based map pins with:
+- Chakra UI color scheme (green.500 for open, red.500 for closed)
+- Precise anchor points for accurate location marking
+- Dynamic color changes based on café status
+- Consistent styling with badge components
+
+### Map State Management
+- Client-side rendering with Next.js dynamic imports
+- Error boundary for graceful handling of hot-reload issues
+- Cleanup logic to prevent memory leaks
+- Real-time filtering synchronized with "Open Now" toggle
+
 ## Acknowledgments
 
 - Inspired by [MatchaMate Melbourne](https://matchamatee.vercel.app/)
-- Café information sourced from Google Maps and local knowledge
+- Café information and opening hours sourced from Google Maps
 - Built with ❤️ and 🍵 for the Adelaide matcha community
