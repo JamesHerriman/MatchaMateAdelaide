@@ -24,8 +24,8 @@ const createCustomIcon = (isOpen: boolean) => {
   return L.icon({
     iconUrl,
     iconSize: [25, 41],
-    iconAnchor: [12, 41],
-    popupAnchor: [1, -34]
+    iconAnchor: [12.5, 31],
+    popupAnchor: [0, -31]
   })
 }
 
