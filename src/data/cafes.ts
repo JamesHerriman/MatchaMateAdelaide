@@ -239,11 +239,11 @@ export const cafes: Café[] = [
   {
     id: 'florice-cafe',
     name: 'Florice Café',
-    address: '88 O\'Connell St, North Adelaide SA 5006',
-    lat: -34.90772,
-    lng: 138.59444,
+    address: '81 Flinders St, Adelaide SA 5000',
+    lat: -34.92745,
+    lng: 138.60576,
     specialty: 'Specialty coffee & matcha',
-    description: 'Charming North Adelaide café serving quality matcha drinks alongside specialty coffee.',
+    description: 'Charming café serving quality matcha drinks alongside specialty coffee.',
     openingHours: {
       monday: '7:00 AM - 3:30 PM',
       tuesday: '7:00 AM - 3:30 PM',
@@ -257,9 +257,9 @@ export const cafes: Café[] = [
   {
     id: 'twentyeight-dessert-bar',
     name: 'TwentyEight Dessert Bar',
-    address: '28 Hutt St, Adelaide SA 5000',
-    lat: -34.92738,
-    lng: 138.60835,
+    address: '18 Witcombe St, Adelaide SA 5000',
+    lat: -34.92156,
+    lng: 138.60127,
     specialty: 'Desserts & matcha drinks',
     description: 'Asian-inspired dessert bar featuring matcha drinks and delightful sweet treats.',
     openingHours: {
