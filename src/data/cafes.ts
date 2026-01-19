@@ -258,8 +258,8 @@ export const cafes: Café[] = [
     id: 'twentyeight-dessert-bar',
     name: 'TwentyEight Dessert Bar',
     address: '18 Witcombe St, Adelaide SA 5000',
-    lat: -34.92156,
-    lng: 138.60127,
+    lat: -34.929936112791786,
+    lng: 138.59459868523524,
     specialty: 'Desserts & matcha drinks',
     description: 'Asian-inspired dessert bar featuring matcha drinks and delightful sweet treats.',
     openingHours: {
