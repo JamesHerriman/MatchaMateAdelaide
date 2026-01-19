@@ -39,6 +39,7 @@ const CafeMap = dynamic(() => import('@/components/CafeMap'), {
 export default function CafesPage() {
   const [cafeRatings, setCafeRatings] = useState<Record<string, { average: number; count: number }>>({})
   const [showOpenOnly, setShowOpenOnly] = useState(false)
+  const [locationFilter, setLocationFilter] = useState<'cbd' | 'outside' | 'all'>('all')
 
   useEffect(() => {
     const fetchAllRatings = async () => {
@@ -73,10 +74,29 @@ export default function CafesPage() {
   // Filter and sort cafes
   let filteredCafes = [...cafes]
 
+  // Apply location filter
+  if (locationFilter !== 'all') {
+    filteredCafes = filteredCafes.filter(cafe => cafe.location === locationFilter)
+  }
+
   // Apply "Open Now" filter if enabled
   if (showOpenOnly) {
     filteredCafes = filteredCafes.filter(cafe => isCafeOpen(cafe))
   }
+
+  // Calculate map center and zoom based on location filter
+  const getMapSettings = () => {
+    if (locationFilter === 'cbd') {
+      return { center: [-34.9285, 138.6007] as [number, number], zoom: 15 }
+    } else if (locationFilter === 'outside') {
+      return { center: [-34.89, 138.56] as [number, number], zoom: 12 }
+    } else {
+      // Show all cafes - zoom out to see both CBD and outside
+      return { center: [-34.91, 138.58] as [number, number], zoom: 12 }
+    }
+  }
+
+  const mapSettings = getMapSettings()
 
   // Sort cafes by rating (highest first), then alphabetically for unrated cafes
   const sortedCafes = filteredCafes.sort((a, b) => {
@@ -107,17 +127,57 @@ export default function CafesPage() {
                 Adelaide's Matcha Cafés
               </Heading>
               <Text fontSize="lg" color="gray.600">
-                Explore {cafes.length} authentic matcha spots across Adelaide CBD
+                Explore {cafes.length} authentic matcha spots across Adelaide
               </Text>
             </Box>
 
             {/* Map Section */}
             <Box>
-              <Heading as="h2" size="lg" color="matcha.600" mb={4}>
-                Map View
-              </Heading>
+              <HStack justify="space-between" align="center" mb={4}>
+                <Heading as="h2" size="lg" color="matcha.600">
+                  Map View
+                </Heading>
+                <HStack spacing={4}>
+                  <FormControl display="flex" alignItems="center" w="auto">
+                    <FormLabel htmlFor="location-filter" mb="0" fontSize="sm" color="gray.700" mr={2}>
+                      Location:
+                    </FormLabel>
+                    <HStack spacing={2}>
+                      <Button
+                        size="sm"
+                        variant={locationFilter === 'all' ? 'solid' : 'outline'}
+                        colorScheme="matcha"
+                        onClick={() => setLocationFilter('all')}
+                      >
+                        All
+                      </Button>
+                      <Button
+                        size="sm"
+                        variant={locationFilter === 'cbd' ? 'solid' : 'outline'}
+                        colorScheme="matcha"
+                        onClick={() => setLocationFilter('cbd')}
+                      >
+                        CBD
+                      </Button>
+                      <Button
+                        size="sm"
+                        variant={locationFilter === 'outside' ? 'solid' : 'outline'}
+                        colorScheme="matcha"
+                        onClick={() => setLocationFilter('outside')}
+                      >
+                        Outside CBD
+                      </Button>
+                    </HStack>
+                  </FormControl>
+                </HStack>
+              </HStack>
               <MapErrorBoundary>
-                <CafeMap cafes={filteredCafes} isCafeOpen={isCafeOpen} />
+                <CafeMap
+                  cafes={filteredCafes}
+                  isCafeOpen={isCafeOpen}
+                  center={mapSettings.center}
+                  zoom={mapSettings.zoom}
+                />
               </MapErrorBoundary>
             </Box>
 
