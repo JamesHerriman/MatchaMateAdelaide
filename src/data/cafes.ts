@@ -302,8 +302,8 @@ export const cafes: Café[] = [
       wednesday: '7:00 AM - 3:00 PM',
       thursday: '7:00 AM - 3:00 PM',
       friday: '7:00 AM - 3:00 PM',
-      saturday: '8:00 AM - 3:00 PM',
-      sunday: '8:00 AM - 3:00 PM'
+      saturday: '8:00 AM - 2:00 PM',
+      sunday: 'Closed'
     }
   },
   {
@@ -316,13 +316,13 @@ export const cafes: Café[] = [
     specialty: 'Korean cafe with matcha',
     description: 'Korean-style café and restaurant offering authentic matcha drinks.',
     openingHours: {
-      monday: '8:00 AM - 9:00 PM',
-      tuesday: '8:00 AM - 9:00 PM',
-      wednesday: '8:00 AM - 9:00 PM',
-      thursday: '8:00 AM - 9:00 PM',
-      friday: '8:00 AM - 9:00 PM',
-      saturday: '8:00 AM - 9:00 PM',
-      sunday: '8:00 AM - 9:00 PM'
+      monday: '7:30 AM - 3:00 PM',
+      tuesday: '7:30 AM - 3:00 PM',
+      wednesday: '7:30 AM - 3:00 PM',
+      thursday: '7:30 AM - 3:00 PM',
+      friday: '7:30 AM - 3:00 PM',
+      saturday: '8:00 AM - 2:00 PM',
+      sunday: '8:00 AM - 2:00 PM'
     }
   },
   {
@@ -335,13 +335,13 @@ export const cafes: Café[] = [
     specialty: 'Specialty coffee & matcha',
     description: 'Modern Hindmarsh café with quality matcha and specialty coffee.',
     openingHours: {
-      monday: '7:00 AM - 3:00 PM',
-      tuesday: '7:00 AM - 3:00 PM',
-      wednesday: '7:00 AM - 3:00 PM',
-      thursday: '7:00 AM - 3:00 PM',
-      friday: '7:00 AM - 3:00 PM',
-      saturday: '8:00 AM - 2:00 PM',
-      sunday: '8:00 AM - 2:00 PM'
+      monday: 'Closed',
+      tuesday: 'Closed',
+      wednesday: '8:00 AM - 1:00 PM',
+      thursday: '8:00 AM - 1:00 PM',
+      friday: '8:00 AM - 1:00 PM',
+      saturday: '9:00 AM - 1:00 PM',
+      sunday: '9:00 AM - 1:00 PM'
     }
   },
   {
@@ -354,13 +354,13 @@ export const cafes: Café[] = [
     specialty: 'Vietnamese cafe with matcha',
     description: 'Vietnamese café in Woodville South serving matcha drinks and Vietnamese treats.',
     openingHours: {
-      monday: 'Closed',
-      tuesday: '8:00 AM - 4:00 PM',
-      wednesday: '8:00 AM - 4:00 PM',
-      thursday: '8:00 AM - 4:00 PM',
-      friday: '8:00 AM - 4:00 PM',
-      saturday: '8:00 AM - 4:00 PM',
-      sunday: '8:00 AM - 4:00 PM'
+      monday: '7:30 AM - 3:00 PM',
+      tuesday: '7:30 AM - 3:00 PM',
+      wednesday: '7:30 AM - 3:00 PM',
+      thursday: '7:30 AM - 3:00 PM',
+      friday: '7:30 AM - 3:00 PM',
+      saturday: '8:00 AM - 3:00 PM',
+      sunday: '8:00 AM - 3:00 PM'
     }
   },
   {
@@ -373,13 +373,13 @@ export const cafes: Café[] = [
     specialty: 'Asian cafe with matcha',
     description: 'Asian-inspired café in Mansfield Park offering matcha drinks.',
     openingHours: {
-      monday: '8:00 AM - 5:00 PM',
-      tuesday: '8:00 AM - 5:00 PM',
-      wednesday: '8:00 AM - 5:00 PM',
-      thursday: '8:00 AM - 5:00 PM',
-      friday: '8:00 AM - 5:00 PM',
-      saturday: '8:00 AM - 5:00 PM',
-      sunday: '8:00 AM - 5:00 PM'
+      monday: 'Closed',
+      tuesday: 'Closed',
+      wednesday: '10:00 AM - 7:00 PM',
+      thursday: '10:00 AM - 7:00 PM',
+      friday: '10:00 AM - 7:00 PM',
+      saturday: '10:00 AM - 4:00 PM',
+      sunday: '10:00 AM - 4:00 PM'
     }
   }
 ];
