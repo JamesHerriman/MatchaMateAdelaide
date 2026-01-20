@@ -40,7 +40,7 @@ const CafeMap = dynamic(() => import('@/components/CafeMap'), {
 export default function CafesPage() {
   const [cafeRatings, setCafeRatings] = useState<Record<string, { average: number; count: number }>>({})
   const [showOpenOnly, setShowOpenOnly] = useState(false)
-  const [locationFilter, setLocationFilter] = useState<'cbd' | 'outside' | 'all'>('all')
+  const [locationFilter, setLocationFilter] = useState<'cbd' | 'outside' | 'all'>('cbd')
 
   useEffect(() => {
     const fetchAllRatings = async () => {
@@ -159,14 +159,6 @@ export default function CafesPage() {
                         onClick={() => setLocationFilter('cbd')}
                       >
                         CBD
-                      </Button>
-                      <Button
-                        size="sm"
-                        variant={locationFilter === 'outside' ? 'solid' : 'outline'}
-                        colorScheme="matcha"
-                        onClick={() => setLocationFilter('outside')}
-                      >
-                        Outside CBD
                       </Button>
                     </HStack>
                   </FormControl>
