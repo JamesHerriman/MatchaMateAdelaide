@@ -381,5 +381,24 @@ export const cafes: Café[] = [
       saturday: '10:00 AM - 4:00 PM',
       sunday: '10:00 AM - 4:00 PM'
     }
+  },
+  {
+    id: 'chu-chu',
+    name: 'Chu Chu',
+    address: 'Shop 6/7 Topham Mall, Adelaide SA 5000',
+    lat: -34.92515928865467,
+    lng: 138.59778208429708,
+    location: 'cbd',
+    specialty: 'Specialty coffee & matcha',
+    description: 'CBD café serving quality matcha drinks and specialty coffee.',
+    openingHours: {
+      monday: '6:30 AM - 4:00 PM',
+      tuesday: '6:30 AM - 4:00 PM',
+      wednesday: '6:30 AM - 4:00 PM',
+      thursday: '6:30 AM - 4:00 PM',
+      friday: '6:30 AM - 4:00 PM',
+      saturday: 'Closed',
+      sunday: 'Closed'
+    }
   }
 ];
